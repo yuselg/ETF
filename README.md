@@ -56,9 +56,11 @@ File created    : bank/bank/model/etf_model_access.e
 %
 ```
 
-You can copy the generated code in directory `bank` to your Laptop and continue with the the design of the application as shown below. 
+At the command line, (1) make a directory `bank`; (2) run the `etf` command on the UI grammar file `ui-grammar.txt bank`; (3) the generated code is placed in directory `bank`.
 
-We use the EiffelStudio-IDE to compile the generate code. Create a temporary directory in which to compile the EIFGENs (not needed on your Laptop). Assuming your login is `student`:
+You can copy the generated code in directory `bank` to your Laptop and continue with the the design of the application on your Laptop, as shown below. 
+
+Use the EiffelStudio/IDE to compile the generated code. First, create a temporary directory in which to compile the EIFGENs (this step not needed on your Laptop). Assuming your login is `student`:
 
 `mkdir /tmp/student`
 
@@ -72,6 +74,8 @@ The above command will compile the project. There is a fairly long initial compi
 
 After compilation, if you execute the system, you get the Graphical User Interface:
 ![](images/gui.png)
+
+### Switch to the command line
 
 We **strongly advise** that you immediately switch to the command line interface, from which we will be able to run acceptance tests in batch mode. To do this, change a switch in the ROOT class:
 
@@ -96,7 +100,9 @@ Now recompile, and then create a symbolic link to the workbench executable
 
 `ln -s /tmp/student/EIFGENs/bank/W_code/bank bank.exe`
 
-You can now execute the generated code in 
+### Interactive Mode
+
+You can now execute the generated code in **Interactive Mode** (switch `-i`):
 
 ```
 % ./bank.exe -i
@@ -108,7 +114,7 @@ You can now execute the generated code in
 
 Of course, nothing of value happens as there is no Model logic. 
 
-## Batch mode: acceptance tests
+### Batch mode: acceptance tests
 
 We will want to run in **Batch mode**, using **acceptance tests**. An example of an acceptance test at the UI is:
 
