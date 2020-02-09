@@ -56,7 +56,7 @@ File created    : bank/bank/model/etf_model_access.e
 %
 ```
 
-You can copy the generated code in directory `bank` to your Laptop and continue with the complication as shown below. 
+You can copy the generated code in directory `bank` to your Laptop and continue with the the design of the application as shown below. 
 
 We use the EiffelStudio-IDE to compile the generate code. Create a temporary directory in which to compile the EIFGENs (not needed on your Laptop). Assuming your login is `student`:
 
