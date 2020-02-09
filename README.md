@@ -6,7 +6,7 @@ In most applications, there is the **User Interface** (UI) and then there is the
 
 At the UI, a user can do actions (or commands) such as deposit money, withdraw  money, transfer money, and view the balance. 
 
-The business logic is the part of the computer program that contains the rules that defines or constrains how a business operates. For example, when depositing money to an account, its balance should increase by the deposit, and when withdrawing the balance should not become negative. The data structures and algorithms involved in the business logic perform the behind-the-scenes data processing -- that is invisible to the user -- but is critical to keeping the business running smoothly . 
+The business logic is the part of the computer program that contains the rules that defines or constrains how a business operates. For example, when depositing money to an account, its balance should increase by the deposit, and when withdrawing the balance should not become negative. The data structures and algorithms involved in the business logic -- perform the behind-the-scenes data processing that is invisible to the user -- but is critical to keeping the business running smoothly . 
 
 ## Decoupling the Model from the User Interface
 Such applications often use a pattern called Model-View-Controller (MVC) which is a software design pattern commonly used for developing user interfaces which divides the related program logic into three **loosely connected** elements. 
