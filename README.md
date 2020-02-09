@@ -18,7 +18,7 @@ Such applications often use a pattern called Model-View-Controller (MVC) which i
 ## Design via ETF in EECS-3311
 We use ETF in EECS-3311 to **decouple** the User Interface from the Model. The Model is **independent** of the User interface, and can be exported to a web-app, desktop app, mobile app without change.  In each of these cases it is the User Interface that must change, with the model remaining invariant. Thus, in EECS-3311:
 
-1. students are given the informal requirements for an application (e.g. a simple bank);
+1. students are given the informal requirements for an application (e.g. in this tutorial, a simple bank);
 2. the instructor constrains the way in which the application can be used at the User Interface via an abstract UI-grammar;
 3. but, there is no constraint on the **design** of the classes in the **Model**. It is here where the design is **open-ended** and it is up to students to design the various classes, their features, the **architecture** (how the classes relate to each other), and the **specification** of the class APIs (via contracts). 
 4. Finally, instructors can test the feasibility and correctness of the student's design via acceptance tests that check the application at the User Interface. 
