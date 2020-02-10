@@ -16,6 +16,6 @@ Then, in the IDE, recompile. The sub-cluster operations will automatically be th
 
 A tests folder is also automatically generated. However, this folder is not automatically part of the system. To add this folder as a cluster, use the Settings tool of the IDE. Right click on the Clusters group, and then do as follows:
 
-![](../images/tests/png)
+![](../images/tests.png)
 
 Then recompile. Cluster “tests” will now show.
