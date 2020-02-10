@@ -1,0 +1,9 @@
+system bank
+-- small bank
+
+type ID = STRING
+new(a_id: ID) -- add a new account id to bank
+
+deposit(a_id: ID; a_value: VALUE)
+withdraw(a_id:ID; a_value: VALUE)
+transfer(id1: ID; id2: ID; a_value: VALUE)

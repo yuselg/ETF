@@ -1,0 +1,7 @@
+-- acceptance test at1.txt
+new("pam")
+new("max")
+deposit("pam", 125.50)
+deposit("max", 50.00)
+withdraw("pam", 25.50)
+transfer("max", "pam", 30.00)

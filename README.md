@@ -186,7 +186,151 @@ We must now design the business logic and glue the UI commands to the business l
 * We never change anything in the cluster `generated_code`
 * We can change class `ETF_MODEL` (with care) and add new classes in cluster `model`
 * We may access class `ETF_MODEL` via class `ETF_MODEL_ACCESS` using the singleton design pattern.
-* We glue user actions received at the UI to the model classes via classes in the cluster `user_commands` (as will be shown). Classes in cluster `user_commands` depend on classes in cluster `model` (but **not** *vice versa*). Thus, the `model` cluster with the business logic is decoupled from the User Interface and does not depend upon it. This is a major goal of ETF, and it means that the business logic can be ported to a desktop-app, a mobile-app or a web-app unchanged. 
+* We glue user actions received at the UI (e.g. in an acceptance tests) to the model classes via classes in the cluster `user_commands` (as will be shown). Classes in cluster `user_commands` depend on classes in cluster `model` (but **not** *vice versa*). Thus, the `model` cluster -- with the business logic -- is decoupled from the User Interface and does not depend upon it. This is a major goal of ETF, and it means that the business logic can be ported to a desktop-app, a mobile-app or a web-app unchanged. 
 
 
+## Get the user commands at the UI working
+
+We can do this, user command by user command. We start with the abstract user command: `new(a_id: ID)`.
+
+### new("pam")
+
+We need a class `ID` in the `model` cluster designed in the usual way. We can add this class via the IDE in the usual way:
+
+![](images/id.png)
+
+We will also need a class `ACCOUNT`, so that the model cluster now looks as follows:
+
+```
+model
+├── account.e             -- new model class
+├── etf_model.e
+├── etf_model_access.e
+└── id.e                  -- new model class
+```
+
+In class `ETF_MODEL`, we can add an attribute `bank: FUN[ID, ACCOUNT]` and a command `new(a_id: STRING)`:
+
+```eiffel
+class 
+	ETF_MODEL ... 
+	
+feature -- new
+	bank: FUN[ID, ACCOUNT]  -- initialize in make
+
+	has(id: ID): BOOLEAN
+			-- does `bank` have customer with `id`
+		do
+			Result := bank.domain.has (id)
+		end
+
+	new(id: ID)
+		require
+			not has (id)
+		local
+			account: ACCOUNT
+		do
+			create account.make (id)
+			bank.extend ([id, account])
+		end
+
+feature -- queries
+	out : STRING
+		do
+			create Result.make_from_string ("  ")
+			Result.append ("System State: default model state ")
+			Result.append ("(")
+			Result.append (i.out)
+			Result.append (")")
+			Result.append ("%N  ")
+			Result.append (bank.out)    -- add this to print state of the bank
+		end
+end
+		
+```
+
+When the system is executed, at the UI it prints `{ETF_MODEL}out` to the command line in response to each user command such as `new("pam")`. We have thus extended the `out` query with `Result.append (bank.out)`. 
+
+However, at this point, we have not yet glued the user commands at the UI to the model, so all we get is:
+
+```
+% ./bank.exe -b at1.txt 
+  System State: default model state (0)
+  {  }
+->new("pam")
+  System State: default model state (1)
+  {  }
+```
+
+### Glue the command at the UI to the model
+
+The **default** generated template for `ETF_NEW` in sub-cluster `user_commands` is:
+
+```eiffel
+class ETF_NEW inherit ETF_NEW_INTERFACE create
+	make
+feature -- command 
+	new(a_id: STRING)
+		require else 
+			new_precond(a_id)
+    	do
+			-- perform some update on the model state
+			model.default_update
+			etf_cmd_container.on_change.notify ([Current])
+    	end
+
+end
+```
+
+This is the class where the `new("pam")` command is received. We must thus invoke `{ETF_MODEL}new`, as follows:
+
+```eiffel
+class ETF_NEW ... feature
+
+	new(a_id: STRING)
+		require else
+			new_precond(a_id)
+		local
+			id: ID
+    	do
+			-- perform some update on the model state
+			model.default_update
+			create id.make (a_id)
+			if not model.has(id) then  -- check precondition 
+				model.new (a_id)
+			else
+				-- provide a message if not
+			end
+
+			-- always include the following
+			etf_cmd_container.on_change.notify ([Current])
+    	end
+```
+
+We now obtain more when running the acceptance test:
+
+```
+jso% ./bank.exe -b at1.txt 
+  System State: default model state (0)
+  {  }
+->new("pam")
+  System State: default model state (1)
+  { pam -> (0.00,pam) }
+->new("max")
+  System State: default model state (2)
+  { pam -> (0.00,pam), max -> (0.00,max) }
+->deposit("pam",125.5)
+  System State: default model state (3)
+  { pam -> (0.00,pam), max -> (0.00,max) }
+```
+
+However, UI user commands `deposit`, `withdraw` etc. are still not working. There is obviously much more to do.
+  
+## Continue the Design ...
+
+Apart from the fact that output still does not match the expected, there is still much more to do, and the design is far from the ideal. 
+
+In design, the skill you wish to develop is the ability to distill a complex problem into its simplest components, and to organize the components into a cohesive and maintainable product.
+
+Over to you!
 
