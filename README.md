@@ -1,5 +1,7 @@
 # Eiffel Testing Framework (ETF)
 
+ETF was developed by the Software Engineering Laboratory at York University -- to introduce students to open-ended design problems, while allowing instructors to check the feasibility and correctness of the designs via acceptance testing. See [2018 IEEE 8th International Model-Driven Requirements Engineering Workshop (MoDRE)](https://ieeexplore.ieee.org/document/8501488).
+
 In most applications, there is the **User Interface** (UI) and then there is the **Business Logic**. To take the stock example of a bank ATM, a user might see the following UI:
 
 ![](images/withdraw.png)
@@ -21,7 +23,8 @@ We use ETF in EECS-3311 to **decouple** the User Interface from the Model. The M
 1. students are given the informal requirements for an application (e.g. in this tutorial, a simple bank);
 2. the instructor constrains the way in which the application can be used at the User Interface via an abstract UI-grammar;
 3. but, there is no constraint on the **design** of the classes in the **Model**. It is here where the design is **open-ended** and it is up to students to design the various classes, their features, the **architecture** (how the classes relate to each other), and the **specification** of the class APIs (via contracts). 
-4. Finally, instructors can test the feasibility and correctness of the student's design via acceptance tests that check the application at the User Interface. 
+4. There are many possible solutions to the design problem, some being better than the others. Students make design decisions justifying one potential design over others. 
+5. Finally, instructors can test the feasibility and correctness of the student's design via acceptance tests that check the application at the User Interface. 
 
 ## The abstract UI grammar of a simple bank
 It is often premature to start coding a concrete User Interface. Instead we provide an abstract grammar of the actions (or commands) that users can invoke, e.g.
@@ -186,7 +189,8 @@ We must now design the business logic and glue the UI commands to the business l
 * We never change anything in the cluster `generated_code`
 * We can change class `ETF_MODEL` (with care) and add new classes in cluster `model`
 * We may access class `ETF_MODEL` via class `ETF_MODEL_ACCESS` using the singleton design pattern.
-* We glue user actions received at the UI (e.g. in an acceptance tests) to the model classes via classes in the cluster `user_commands` (as will be shown). Classes in cluster `user_commands` depend on classes in cluster `model` (but **not** *vice versa*). Thus, the `model` cluster -- with the business logic -- is decoupled from the User Interface and does not depend upon it. This is a major goal of ETF, and it means that the business logic can be ported to a desktop-app, a mobile-app or a web-app unchanged. 
+* We glue user actions received at the UI (e.g. in an acceptance tests) to the model classes via classes in the cluster `user_commands` (as will be shown). 
+* Classes in cluster `user_commands` depend on classes in cluster `model` (but **not** *vice versa*). Thus, the `model` cluster -- with the business logic -- is decoupled from the User Interface and does not depend upon it. This is a major goal of ETF, and it means that the business logic can be ported to a desktop-app, a mobile-app or a web-app unchanged. 
 
 
 ## Get the user commands at the UI working
