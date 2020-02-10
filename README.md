@@ -332,7 +332,7 @@ However, UI user commands `deposit`, `withdraw` etc. are still not working. Ther
   
 ## Continue the Design ...
 
-Apart from the fact that output still does not match the expected, there is still much more to do, and the design is far from the ideal. 
+Apart from the fact that the output still does not match the **expected** output, there is still much more to do, and the design is far from the ideal. 
 
 In design, the skill you wish to develop is the ability to distill a complex problem into its simplest components, and to organize the components into a cohesive and maintainable product.
 
