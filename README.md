@@ -338,3 +338,12 @@ In design, the skill you wish to develop is the ability to distill a complex pro
 
 Over to you!
 
+## Topics
+
+[Adding Sub-Clusters in ETF models](topics/sub-clusters.md)
+
+Still To Do:
+
+* Regression testing
+* Executing a 
+
