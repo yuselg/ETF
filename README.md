@@ -345,5 +345,5 @@ Over to you!
 Still To Do:
 
 * Regression testing
-* Executing a 
+* Using the debugger to track errors using acceptance tests.
 
