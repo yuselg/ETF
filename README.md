@@ -340,10 +340,11 @@ Over to you!
 
 ## Topics
 
-[Adding Sub-Clusters in ETF models](topics/sub-clusters.md)
+* [Adding Sub-Clusters in ETF models](topics/sub-clusters.md)
 
-Still To Do:
+* [Seqence of ETF Instruction Videos](https://www.eecs.yorku.ca/~jackie/teaching/tutorials/index.html#eiffel_testing_framework). 
 
-* Regression testing
+* See [Regression Testing Video](https://youtu.be/KdlZfspZjn8). Also shows how to use Github if you re working on your Laptop or at home.
+
 * Using the debugger to track errors using acceptance tests.
 
